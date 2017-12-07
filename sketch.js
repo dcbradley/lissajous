@@ -187,7 +187,7 @@ function draw() {
   var yoff = plot_y0+yamp;
   var zamp = 360/2;
   var zoff = 360/2;
-  var bouncy_r = 4;
+  var bouncy_r = 8;
 
   var now = Date.now();
   var delta_t = (now-start_t)/1000.0; // seconds since we began drawing this curve
@@ -270,21 +270,23 @@ function draw() {
     last_t = t;
   }
 
+  noStroke();
+
   // draw bouncy balls along the x and y axis
   if( bouncy_balls ) {
     // erase previous position
-    stroke(0,0,0);
+    // use a rect to erase instead of a circle, because in chrome, little traces
+    // of the previous circle get left behind for some reason
     fill(0,0,0);
-    ellipse(last_bouncy_x,plot_y1+bouncy_r*2,bouncy_r+1);
-    ellipse(plot_x1+bouncy_r*2,last_bouncy_y,bouncy_r+1);
+    rect(last_bouncy_x-bouncy_r,plot_y1+2,bouncy_r*2,bouncy_r*2);
+    rect(plot_x1+2,last_bouncy_y-bouncy_r,bouncy_r*2,bouncy_r*2);
   }
   // turn off bouncy balls at high speed, because they get annoying
   bouncy_balls = w <= 0.01;
   if( bouncy_balls ) {
-    stroke(last_z,60,100);
     fill(last_z,60,100);
-    ellipse(last_x,plot_y1+bouncy_r*2,bouncy_r);
-    ellipse(plot_x1+bouncy_r*2,last_y,bouncy_r);
+    ellipse(last_x,plot_y1+2+bouncy_r,bouncy_r);
+    ellipse(plot_x1+2+bouncy_r,last_y,bouncy_r);
   }
 }
 
