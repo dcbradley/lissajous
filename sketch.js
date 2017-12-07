@@ -102,18 +102,18 @@ function setup() {
 
   fx_up_button = createButton('&#8593;');
   fx_down_button = createButton('&#8595;');
-  fx_up_button.mousePressed(fxUp);
-  fx_down_button.mousePressed(fxDown);
+  fx_up_button.mouseClicked(fxUp);
+  fx_down_button.mouseClicked(fxDown);
 
   fy_up_button = createButton('&#8593;');
   fy_down_button = createButton('&#8595;');
-  fy_up_button.mousePressed(fyUp);
-  fy_down_button.mousePressed(fyDown);
+  fy_up_button.mouseClicked(fyUp);
+  fy_down_button.mouseClicked(fyDown);
 
   fz_up_button = createButton('&#8593;');
   fz_down_button = createButton('&#8595;');
-  fz_up_button.mousePressed(fzUp);
-  fz_down_button.mousePressed(fzDown);
+  fz_up_button.mouseClicked(fzUp);
+  fz_down_button.mouseClicked(fzDown);
 
   fx_label = createDiv();
   fy_label = createDiv();
@@ -130,16 +130,16 @@ function setup() {
   scale_selector.changed(newPlot);
 
   play_button = createButton('Play');
-  play_button.mousePressed(soundOn);
+  play_button.mouseClicked(soundOn);
 
   mute_button = createButton('Mute');
-  mute_button.mousePressed(soundOff);
+  mute_button.mouseClicked(soundOff);
   mute_button.hide();
 
   speed_up_button = createButton('&#8593;');
   slow_down_button = createButton('&#8595;');
-  speed_up_button.mousePressed(speedUp);
-  slow_down_button.mousePressed(slowDown);
+  speed_up_button.mouseClicked(speedUp);
+  slow_down_button.mouseClicked(slowDown);
   speed_label = createDiv();
   speed_label.class("label");
 
@@ -147,7 +147,7 @@ function setup() {
   ratio_label.class("label");
 
   reset_button = createButton("Reset");
-  reset_button.mousePressed(startOver);
+  reset_button.mouseClicked(startOver);
 
   noStroke();
   colorMode(HSB);
@@ -185,32 +185,34 @@ function draw() {
     bouncy_balls = w <= 0.01;
 
     fx_up_button.position(20,plot_y1+bouncy_r*2+4);
-    fx_down_button.position(fx_up_button.position().x,fx_up_button.position().y+fx_up_button.size().height);
+    fx_down_button.position(20,fx_up_button.position().y+fx_up_button.size().height);
     fx_label.position(fx_up_button.position().x+fx_up_button.size().width+4,fx_up_button.position().y);
     fx_label.html("x frequency:<br>" + Math.round(fx) + " Hz (" + fx_name + ")");
 
-    fy_up_button.position(plot_x1+bouncy_r*2+4,20);
-    fy_down_button.position(fy_up_button.position().x,fy_up_button.position().y+fy_up_button.size().height);
+    var lpanel_x0 = plot_x1+bouncy_r*2+4;
+
+    fy_up_button.position(lpanel_x0,20);
+    fy_down_button.position(lpanel_x0,fy_up_button.position().y+fy_up_button.size().height);
     fy_label.position(fy_up_button.position().x+fy_up_button.size().width+4,fy_up_button.position().y);
     fy_label.html("y frequency:<br>" + Math.round(fy) + " Hz (" + fy_name + ")");
 
-    fz_up_button.position(fy_up_button.position().x,fx_up_button.position().y);
-    fz_down_button.position(fz_up_button.position().x,fz_up_button.position().y+fz_up_button.size().height);
+    fz_up_button.position(lpanel_x0,fx_up_button.position().y);
+    fz_down_button.position(lpanel_x0,fz_up_button.position().y+fz_up_button.size().height);
     fz_label.position(fz_up_button.position().x+fz_up_button.size().width+4,fz_up_button.position().y);
     fz_label.html("color frequency:<br>" + Math.round(fz) + " Hz (" + fz_name + ")");
 
-    scale_selector.position(fy_up_button.position().x,plot_y0 + (plot_y1-plot_y0)/2);
+    scale_selector.position(lpanel_x0,plot_y0 + (plot_y1-plot_y0)/2);
 
-    play_button.position(scale_selector.position().x,scale_selector.position().y+scale_selector.size().height+10);
-    mute_button.position(scale_selector.position().x,scale_selector.position().y+scale_selector.size().height+10);
-    reset_button.position(scale_selector.position().x,scale_selector.position().y+scale_selector.size().height+reset_button.size().height+10);
+    play_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+10);
+    mute_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+10);
+    reset_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+reset_button.size().height*2);
 
     speed_up_button.position(plot_x0+(plot_x1-plot_x0)/2,fx_up_button.position().y);
-    slow_down_button.position(speed_up_button.position().x,speed_up_button.position().y+speed_up_button.size().height);
+    slow_down_button.position(plot_x0+(plot_x1-plot_x0)/2,speed_up_button.position().y+speed_up_button.size().height);
     speed_label.position(speed_up_button.position().x+speed_up_button.size().width+4,speed_up_button.position().y);
     speed_label.html("Drawing speed: " + (w/(2*Math.PI)).toPrecision(2));
 
-    ratio_label.position(fy_up_button.position().x,plot_y0+(plot_y1-plot_y0)/4);
+    ratio_label.position(lpanel_x0,plot_y0+(plot_y1-plot_y0)/4);
     ratio_label.html("fx/fy: " + (fx/fy).toFixed(3) + "<br>fy/fx: " + (fy/fx).toFixed(3));
   }
 
