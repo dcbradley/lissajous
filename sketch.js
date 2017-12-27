@@ -38,7 +38,11 @@ var speed_power;
 var bouncy_balls = true;
 var ratio_label;
 var reset_button;
+var clear_button;
 var max_frame_time;
+var fx_mute;
+var fy_mute;
+var fz_mute;
 
 function equal_step(n) {
   return Math.pow(2,n/12.0);
@@ -127,6 +131,16 @@ function setup() {
   fy_label.class("label");
   fz_label.class("label");
 
+  fx_mute = createCheckbox("mute",false);
+  fx_mute.class("label");
+  fx_mute.changed(playSelectedSounds);
+  fy_mute = createCheckbox("mute",false);
+  fy_mute.class("label");
+  fy_mute.changed(playSelectedSounds);
+  fz_mute = createCheckbox("mute",true);
+  fz_mute.class("label");
+  fz_mute.changed(playSelectedSounds);
+
   scale_selector = createRadio();
   scale_selector.class("label");
   scale_selector.option("Just Scale","just");
@@ -156,6 +170,9 @@ function setup() {
 
   ratio_label = createDiv();
   ratio_label.class("label");
+
+  clear_button = createButton("Clear");
+  clear_button.mouseClicked(clearDrawing);
 
   reset_button = createButton("Reset");
   reset_button.mouseClicked(startOver);
@@ -206,6 +223,7 @@ function draw() {
     fx_down_button.position(20,fx_up_button.position().y+fx_up_button.size().height);
     fx_label.position(fx_up_button.position().x+fx_up_button.size().width+4,fx_up_button.position().y);
     fx_label.html("x frequency:<br>" + Math.round(fx) + " Hz (" + fx_name + ")");
+    fx_mute.position(fx_label.position().x,fx_label.position().y+fx_label.size().height);
 
     var lpanel_x0 = plot_x1+bouncy_r*2+4;
 
@@ -213,11 +231,13 @@ function draw() {
     fy_down_button.position(lpanel_x0,fy_up_button.position().y+fy_up_button.size().height);
     fy_label.position(fy_up_button.position().x+fy_up_button.size().width+4,fy_up_button.position().y);
     fy_label.html("y frequency:<br>" + Math.round(fy) + " Hz (" + fy_name + ")");
+    fy_mute.position(fy_label.position().x,fy_label.position().y+fy_label.size().height);
 
     fz_up_button.position(lpanel_x0,fx_up_button.position().y);
     fz_down_button.position(lpanel_x0,fz_up_button.position().y+fz_up_button.size().height);
     fz_label.position(fz_up_button.position().x+fz_up_button.size().width+4,fz_up_button.position().y);
     fz_label.html("color frequency:<br>" + Math.round(fz) + " Hz (" + fz_name + ")");
+    fz_mute.position(fz_label.position().x,fz_label.position().y+fz_label.size().height);
 
     scale_selector.position(lpanel_x0,plot_y0 + (plot_y1-plot_y0)/2);
 
@@ -227,7 +247,8 @@ function draw() {
     mute_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height);
     pause_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*2.5);
     unpause_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*2.5);
-    reset_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*4);
+    clear_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*4);
+    reset_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*5.5);
 
     speed_up_button.position(plot_x0+(plot_x1-plot_x0)/2,fx_up_button.position().y);
     slow_down_button.position(plot_x0+(plot_x1-plot_x0)/2,speed_up_button.position().y+speed_up_button.size().height);
@@ -315,6 +336,10 @@ function newPlot() {
   unpauseDrawing();
 }
 
+function clearDrawing() {
+  background(0);
+}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   newPlot();
@@ -356,12 +381,19 @@ function fzDown() {
   newPlot();
 }
 
+function playSelectedSounds() {
+  if( fx_mute.checked() ) osc1.stop(); else osc1.start();
+  if( fy_mute.checked() ) osc2.stop(); else osc2.start();
+  if( fz_mute.checked() ) osc3.stop(); else osc3.start();
+}
+
 function soundOn() {
-  osc1.start();
-  osc2.start();
-  osc3.start();
+  playSelectedSounds();
   play_button.hide();
   mute_button.show();
+  fx_mute.show();
+  fy_mute.show();
+  fz_mute.show();
 
   if( mute_timer != null ) {
     window.clearTimeout(mute_timer);
@@ -376,6 +408,9 @@ function soundOff() {
   osc3.stop();
   play_button.show();
   mute_button.hide();
+  fx_mute.hide();
+  fy_mute.hide();
+  fz_mute.hide();
   if( mute_timer != null ) {
     window.clearTimeout(mute_timer);
     mute_timer = null;
@@ -408,11 +443,14 @@ function slowDown() {
 function startOver() {
   scale_selector.value("just");
   scale = just_scale;
-  fx_index = 4;
-  fy_index = 7;
-  fz_index = 0;
+  fx_index = 0;
+  fy_index = 4;
+  fz_index = 2;
   speed_power = -10;
   setSpeed();
+  fx_mute.checked(false);
+  fy_mute.checked(false);
+  fz_mute.checked(true);
   soundOff();
   unpauseDrawing();
   newPlot();
