@@ -226,6 +226,7 @@ function draw() {
     fx_mute.position(fx_label.position().x,fx_label.position().y+fx_label.size().height);
 
     var lpanel_x0 = plot_x1+bouncy_r*2+4;
+    var button_height = reset_button.size().height;
 
     fy_up_button.position(lpanel_x0,20);
     fy_down_button.position(lpanel_x0,fy_up_button.position().y+fy_up_button.size().height);
@@ -236,12 +237,10 @@ function draw() {
     fz_up_button.position(lpanel_x0,fx_up_button.position().y);
     fz_down_button.position(lpanel_x0,fz_up_button.position().y+fz_up_button.size().height);
     fz_label.position(fz_up_button.position().x+fz_up_button.size().width+4,fz_up_button.position().y);
-    fz_label.html("color frequency:<br>" + Math.round(fz) + " Hz (" + fz_name + ")");
-    fz_mute.position(fz_label.position().x,fz_label.position().y+fz_label.size().height);
+    fz_label.html("color cycle frequency:<br>" + Math.round(fz) + " Hz (" + fz_name + ")");
+    fz_mute.position(fz_label.position().x,fz_label.position().y-button_height-3);
 
     scale_selector.position(lpanel_x0,plot_y0 + (plot_y1-plot_y0)/2);
-
-    var button_height = reset_button.size().height;
 
     play_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height);
     mute_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height);
