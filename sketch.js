@@ -43,6 +43,7 @@ var max_frame_time;
 var fx_mute;
 var fy_mute;
 var fz_mute;
+var about_button;
 
 function equal_step(n) {
   return Math.pow(2,n/12.0);
@@ -177,6 +178,9 @@ function setup() {
   reset_button = createButton("Reset");
   reset_button.mouseClicked(startOver);
 
+  about_button = createButton("About");
+  about_button.mouseClicked(loadAbout);
+
   noStroke();
   colorMode(HSB);
 
@@ -248,6 +252,7 @@ function draw() {
     unpause_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*2.5);
     clear_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*4);
     reset_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*5.5);
+    about_button.position(lpanel_x0,scale_selector.position().y+scale_selector.size().height+button_height*7);
 
     speed_up_button.position(plot_x0+(plot_x1-plot_x0)/2,fx_up_button.position().y);
     slow_down_button.position(plot_x0+(plot_x1-plot_x0)/2,speed_up_button.position().y+speed_up_button.size().height);
@@ -464,4 +469,7 @@ function unpauseDrawing() {
   pause_button.show();
   unpause_button.hide();
   loop();
+}
+function loadAbout() {
+  window.location = "about.html";
 }

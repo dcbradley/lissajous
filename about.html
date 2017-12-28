@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Lissajous Curves</title>
+<style>
+body {
+  font-family: Arial;
+  font-size: 18pt;
+}
+/*
+.bg-image {
+  opacity: 0.1;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -250px;
+}
+*/
+table th {
+  width: 3em;
+  text-align: left;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18pt;
+}
+th {
+  color: #87330d;
+}
+.ratio {
+  color: #0d872b;
+}
+sup {
+  font-size: 50%;
+}
+</style>
+</head>
+<body>
+
+<div style='position: fixed; top: 0; left: 0; width: 100%; background-color: #d142f4; text-align: center'><a href=".">Back to the Lissajous curve plotter</a></div>
+
+<img style='float: right; width: 300px; height: 300px; margin-bottom: 100px; padding: 5px; border-style: outset; border-width: 5px;' class='bg-image' src="lissajous-bg.png">
+
+<h1 style='padding-top: 1em;'>Lissajous Curves</h1>
+
+<p>Two oscillations are used to produce a graph called a Lissajous
+curve (pronounced Liss-uh-joo).  One oscillation determins the x
+coordinate and the other oscillation determines the y coordinate.  In
+this demonstration, a third oscillation determines the drawing
+color.</p>
+
+<p>When the ratio of the frequencies of the oscillations is a rational
+number (i.e. expressible as integers a/b), the curve is closed; it
+loops back on itself.  Different ratios produce different shapes.</p>
+
+<h2>Musical Scales</h2>
+
+<p>Sound is an oscillation.  In this demonstration of Lissajous
+curves, musical tones are used as the oscillations that produce the
+curve.</p>
+
+<p>The various tones of a musical scale are not selected at random.
+It was found by many different cultures that if two tones were played
+together, the combination would sound pleasant (consonant) in some
+cases.  An important source of consonance is when the ratio of the
+frequencies (the interval) is expressible as fraction of low integers
+a/b.</p>
+
+<p>The various tones in a scale are traditionally given letters and
+names; the ratio of their frequencies to the base tone is given below
+for the major C <u>just scale</u>.</p>
+
+<table>
+<tr><th>DO</th><th>RE</th><th>MI</th><th>FA</th><th>SOL</th><th>LA</th><th>TI</th><th>DO'</th></tr>
+<tr><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td><td>C'</td></tr>
+<tr><td>1</td><td>9/8</td><td>5/4</td><td>4/3</td><td>3/2</td><td>5/3</td><td>15/8</td><td>2</td></tr>
+</table>
+
+<p>The just scale is designed to produce intervals that form perfect
+ratios with the base tone in the scale.  Other musical scales are
+designed with different considerations in mind.  A commonly used
+system known as the <u>equal tempered scale</u> does not have perfect
+ratios with the base tone, but it has the advantage that any tone in
+the scale can be chosen as the base tone while maintaining the same
+intervals in the scale and the same set of frequencies to choose from.
+In the just scale, on the other hand, the set of frequencies must be
+adjusted, depending on which base tone was chosen.  Since many of the
+intervals in the equal tempered scale are close but not quite perfect
+ratios, the Lissajous curve does not quite loop back on itself as it
+does when using frequencies from the just scale.</p>
+
+<p>The ratio of frequencies to the base tone for the major C equal tempered scale are given below.</p>
+
+<table>
+<tr><th>DO</th><th>RE</th><th>MI</th><th>FA</th><th>SOL</th><th>LA</th><th>TI</th><th>DO'</th></tr>
+<tr><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td><td>C'</td></tr>
+<tr><td>1</td><td>2<sup>2&frasl;12</sup></td><td>2<sup>4&frasl;12</sup></td><td>2<sup>5&frasl;12</sup></td><td>2<sup>7&frasl;12</sup></td><td>2<sup>9&frasl;12</sup></td><td>2<sup>11&frasl;12</sup></td><td>2</td></tr>
+</table>
+
+</body>
+</html>
