@@ -238,7 +238,7 @@ function draw() {
     fz_down_button.position(lpanel_x0,fz_up_button.position().y+fz_up_button.size().height);
     fz_label.position(fz_up_button.position().x+fz_up_button.size().width+4,fz_up_button.position().y);
     fz_label.html("color cycle frequency:<br>" + Math.round(fz) + " Hz (" + fz_name + ")");
-    fz_mute.position(fz_label.position().x,fz_label.position().y-button_height-3);
+    fz_mute.position(fz_label.position().x,fz_label.position().y-button_height*1.5);
 
     scale_selector.position(lpanel_x0,plot_y0 + (plot_y1-plot_y0)/2);
 
