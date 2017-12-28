@@ -144,8 +144,8 @@ function setup() {
   scale_selector = createRadio();
   scale_selector.class("label");
   scale_selector.option("Just Scale","just");
-  scale_selector.option("Equal Tempered Scale","equal");
-  scale_selector.option("Well Tempered Scale","well");
+  scale_selector.option("Equal Tempered","equal");
+  scale_selector.option("Well Tempered","well");
   scale_selector.changed(newPlot);
 
   play_button = createButton('Audio');
