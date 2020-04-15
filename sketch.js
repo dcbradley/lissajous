@@ -471,5 +471,9 @@ function unpauseDrawing() {
   loop();
 }
 function loadAbout() {
-  window.location = "about.html";
+  if( window.location.href.includes("physics.wisc.edu/ingersollmuseum/") ) {
+    window.location = "..";
+  } else {
+    window.location = "about.html";
+  }
 }
